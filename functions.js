@@ -2,28 +2,11 @@ const index = require("./index"),
   client = index.client;
 const { MessageEmbed } = require("discord.js");
 const https = require("https");
-const fs = require("fs");
 const fetch = require("node-fetch");
 require("dotenv").config();
 
 let url = "https://queue-times.com/en-US/parks/61/queue_times.json";
 // let url = "https://queue-times.com/en-US/parks/99/queue_times.json";
-
-function downloadData() {
-  https.get(url, (res) => {
-    const path = "data.json";
-    const writeStream = fs.createWriteStream(path);
-
-    res.pipe(writeStream);
-
-    writeStream.on("finish", () => {
-      writeStream.close();
-      console.log("Download Completed");
-    });
-  });
-}
-
-downloadData();
 
 function sendMessage(channel, sentMessage) {
   fetch(url)
@@ -106,7 +89,6 @@ function sendMessage(channel, sentMessage) {
             channel.send({
               embeds: [embed],
             });
-            downloadData();
           }
         });
       }
