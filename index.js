@@ -18,7 +18,11 @@ client.once("ready", () => {
 
 setInterval(() => {
   sendMessage(channel);
-}, 300000); // 300000
+}, 3000); // 300000
 
 client.login(process.env.token);
 module.exports.client = client;
+
+app.listen("3000", () => {
+  console.log("App listening on port 3000");
+});
